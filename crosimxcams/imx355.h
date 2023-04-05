@@ -1,0 +1,49 @@
+#ifndef _IMX355_H
+#define _IMX355_H
+
+/* Chip ID */
+#define IMX355_REG_CHIP_ID		0x0016
+#define IMX355_CHIP_ID			0x0355
+
+/* V_TIMING internal */
+#define IMX355_REG_FLL			0x0340
+#define IMX355_FLL_MAX			0xffff
+
+/* Exposure control */
+#define IMX355_REG_EXPOSURE		0x0202
+#define IMX355_EXPOSURE_MIN		1
+#define IMX355_EXPOSURE_STEP		1
+#define IMX355_EXPOSURE_DEFAULT		0x0282
+
+/* Analog gain control */
+#define IMX355_REG_ANALOG_GAIN		0x0204
+#define IMX355_ANA_GAIN_MIN		0
+#define IMX355_ANA_GAIN_MAX		960
+#define IMX355_ANA_GAIN_STEP		1
+#define IMX355_ANA_GAIN_DEFAULT		0
+
+/* Digital gain control */
+#define IMX355_REG_DPGA_USE_GLOBAL_GAIN	0x3070
+#define IMX355_REG_DIG_GAIN_GLOBAL	0x020e
+#define IMX355_DGTL_GAIN_MIN		256
+#define IMX355_DGTL_GAIN_MAX		4095
+#define IMX355_DGTL_GAIN_STEP		1
+#define IMX355_DGTL_GAIN_DEFAULT	256
+
+/* Test Pattern Control */
+#define IMX355_REG_TEST_PATTERN		0x0600
+#define IMX355_TEST_PATTERN_DISABLED		0
+#define IMX355_TEST_PATTERN_SOLID_COLOR		1
+#define IMX355_TEST_PATTERN_COLOR_BARS		2
+#define IMX355_TEST_PATTERN_GRAY_COLOR_BARS	3
+#define IMX355_TEST_PATTERN_PN9			4
+
+/* Flip Control */
+#define IMX355_REG_ORIENTATION		0x0101
+
+/* default link frequency and external clock */
+#define IMX355_LINK_FREQ_DEFAULT	360000000
+#define IMX355_EXT_CLK			19200000
+#define IMX355_LINK_FREQ_INDEX		0
+
+#endif

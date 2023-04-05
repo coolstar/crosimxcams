@@ -1,0 +1,72 @@
+;/*++
+;
+;Copyright (c) CoolStar.  All rights reserved.
+;
+;Module Name:
+;    crosimxcams.inf
+;
+;Abstract:
+;    INF file for installing the Chrome IMX Cameras Driver 
+;
+;
+;--*/
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Camera
+ClassGuid   = {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+Provider    = CoolStar
+DriverVer   = 2/23/2022,1.0.0
+CatalogFile = crosimxcams.cat
+PnpLockdown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Class section =====================
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+crosimxcams.sys  = 1,,
+
+;*****************************************
+; crosimxcams  Install Section
+;*****************************************
+
+[Manufacturer]
+%StdMfg%=Standard,NTAMD64
+
+; Decorated model section take precedence over undecorated 
+; ones on XP and later.
+[Standard.NTAMD64]
+%IMX319.DeviceDesc%=CrosImxCams_Device, ACPI\SONY319A
+%IMX355.DeviceDesc%=CrosImxCams_Device, ACPI\SONY355A
+
+[CrosImxCams_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+crosimxcams.sys
+
+;-------------- Service installation
+[CrosImxCams_Device.NT.Services]
+AddService = crosimxcams,%SPSVCINST_ASSOCSERVICE%, CrosImxCams_Service_Inst
+
+; -------------- crosimxcams driver install sections
+[CrosImxCams_Service_Inst]
+DisplayName    = %crosimxcams.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\crosimxcams.sys
+LoadOrderGroup = Base
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+StdMfg                 = "CoolStar"
+DiskId1                = "CrosImxCams Installation Disk #1"
+IMX319.DeviceDesc = "Sony IMX319 Camera"
+IMX355.DeviceDesc = "Sony IMX355 Camera"
+crosimxcams.SVCDESC    = "CrosImxCams Service"
